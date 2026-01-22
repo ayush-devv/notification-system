@@ -1,0 +1,35 @@
+package com.notification.pushconsumer.models.db;
+
+import com.notification.pushconsumer.models.enums.Channel;
+import com.notification.pushconsumer.models.enums.Status;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * Notification Entity - Represents a notification in the system
+ */
+@Entity
+@Table(name = "notifications")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Notification {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    
+    @Enumerated(EnumType.STRING)
+    private Channel channel;
+    
+    @Enumerated(EnumType.STRING)
+    private Status status;
+    
+    private String message;
+    private String hash;
+}
